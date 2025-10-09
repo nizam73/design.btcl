@@ -1,0 +1,122 @@
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  background: #fff;
+  color: #222;
+  text-align: center;
+}
+
+header {
+  background: #2ab573;
+  color: white;
+  padding: 20px 10px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+nav {
+  margin-top: 10px;
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+  margin: 0 15px;
+  font-weight: 500;
+  border-bottom: 2px solid transparent;
+}
+
+nav a.active {
+  border-bottom: 2px solid white;
+}
+
+.tab-content {
+  display: none;
+  margin-top: 30px;
+  justify-content: center;
+}
+
+.tab-content.active {
+  display: flex;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;  /* stack vertically */
+  align-items: center;     /* center all cards horizontally */
+  gap: 20px;               /* space between cards */
+  width: 100%;
+}
+
+.card {
+  width: 90%;
+  max-width: 500px;
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  text-align: left;
+}
+
+.card h2 {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.card p {
+  margin-top: 0;
+  color: #555;
+}
+
+.preview {
+  display: block;
+  width: 20%;
+  height: auto;
+  border-radius: 8px;
+  margin: 15px 0;
+  border: 1px solid #eee;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;     /* ✅ side-by-side */
+  justify-content: left; /* centers all buttons */
+  align-items: center;
+  gap: 10px;               /* space between buttons */
+  margin-top: 10px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px;
+  text-align: center;
+ width: 100px; 
+  border-radius: 6px;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.btn.green {
+  background-color: #2ab573;
+}
+
+.btn.dark {
+  background-color: #024d2e;
+}
+
+.btn.light {
+  background-color: #38B449;
+}
+
+@media (max-width: 600px) {
+  .card {
+    width: 95%;
+    padding: 20px;
+  }
+}
+
+
