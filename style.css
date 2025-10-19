@@ -56,9 +56,10 @@ nav a.active {
   max-width: 500px;
   background: #fff;
   padding: 25px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   text-align: left;
+  border: 2px solid #2AB573;   /* ✅ added green border */
 }
 
 .card h2 {
@@ -118,5 +119,6 @@ nav a.active {
     padding: 20px;
   }
 }
+
 
 
