@@ -34,29 +34,39 @@ nav a.active {
 }
 
 /*-------------.navbar added*/
+
 .navbar {
   display: flex;
-  overflow-x: auto;        /* ✅ enable horizontal scrolling */
-  white-space: nowrap;     /* ✅ prevent wrapping */
-  scrollbar-width: none;   /* ✅ hide scrollbar (Firefox) */
-  -ms-overflow-style: none;/* ✅ hide scrollbar (IE/Edge) */
+  justify-content: center;   /* ✅ center items when possible */
+  overflow-x: auto;          /* ✅ allow horizontal scrolling on small screens */
+  white-space: nowrap;       /* ✅ prevent wrapping */
+  scrollbar-width: none;     /* ✅ hide scrollbar (Firefox) */
+  -ms-overflow-style: none;  /* ✅ hide scrollbar (Edge/IE) */
+  background: #2AB573;       /* optional, adjust as needed */
+  padding: 10px 0;
 }
 
 .navbar::-webkit-scrollbar {
-  display: none;           /* ✅ hide scrollbar (Chrome/Safari) */
+  display: none;             /* ✅ hide scrollbar (Chrome/Safari) */
 }
 
 .navbar a {
-  flex: 0 0 auto;          /* ✅ prevent shrinking */
-  padding: 10px 15px;
+  flex: 0 0 auto;            /* ✅ keeps each link fixed in width */
   color: white;
   text-decoration: none;
   font-weight: bold;
+  padding: 10px 15px;
+  transition: color 0.2s ease;
+}
+
+.navbar a:hover {
+  color: #e0ffe9;            /* optional hover color */
 }
 
 .navbar a.active {
   border-bottom: 2px solid white;
 }
+
 
 /*-------------.navbar added*/
 
@@ -146,6 +156,7 @@ nav a.active {
     padding: 20px;
   }
 }
+
 
 
 
