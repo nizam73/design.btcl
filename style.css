@@ -33,6 +33,33 @@ nav a.active {
   border-bottom: 2px solid white;
 }
 
+/*-------------.navbar added*/
+.navbar {
+  display: flex;
+  overflow-x: auto;        /* ✅ enable horizontal scrolling */
+  white-space: nowrap;     /* ✅ prevent wrapping */
+  scrollbar-width: none;   /* ✅ hide scrollbar (Firefox) */
+  -ms-overflow-style: none;/* ✅ hide scrollbar (IE/Edge) */
+}
+
+.navbar::-webkit-scrollbar {
+  display: none;           /* ✅ hide scrollbar (Chrome/Safari) */
+}
+
+.navbar a {
+  flex: 0 0 auto;          /* ✅ prevent shrinking */
+  padding: 10px 15px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.navbar a.active {
+  border-bottom: 2px solid white;
+}
+
+/*-------------.navbar added*/
+
 .tab-content {
   display: none;
   margin-top: 30px;
@@ -119,6 +146,7 @@ nav a.active {
     padding: 20px;
   }
 }
+
 
 
 
