@@ -100,7 +100,7 @@ nav a.active {
 
 .card {
   width: 90%;
-  max-width: 400px;
+  max-width: 500px;
   background: #fff;
   padding: 25px;
   border-radius: 5px;
@@ -166,6 +166,7 @@ nav a.active {
     padding: 20px;
   }
 }
+
 
 
 
