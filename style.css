@@ -128,6 +128,19 @@ nav a.active {
   border: 1px solid #eee;
 }
 
+
+/*--------------preview-signboard*/
+
+.preview-signboard {
+  display: block;
+  width: 40%;
+  height: auto;
+  border-radius: 2px;
+  margin: 15px 0;
+  border: 1px solid #eee;
+}
+
+
 .buttons {
   display: flex;
   flex-direction: row;     /* ✅ side-by-side */
@@ -166,6 +179,7 @@ nav a.active {
     padding: 20px;
   }
 }
+
 
 
 
