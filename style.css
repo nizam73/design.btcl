@@ -119,6 +119,16 @@ nav a.active {
   color: #555;
 }
 
+/* ========== Divider Added ========== */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: #ccc;       /* light gray line */
+  margin: 10px 0;         /* spacing above/below */
+  border: none;
+}
+
+
 /* ========== Preview Images ========== */
 .preview,
 .preview-signboard {
@@ -197,5 +207,6 @@ nav a.active {
     justify-content: center;
   }
 }
+
 
 
