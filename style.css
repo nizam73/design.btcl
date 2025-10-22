@@ -57,15 +57,23 @@ nav a.active {
   text-decoration: none;
   font-weight: bold;
   padding: 10px 15px;
-  transition: color 0.2s ease;
+  transition: all 0.2s ease;
+  border-bottom: 2px solid transparent;
 }
 
-.navbar a:hover {
-  color: #e0ffe9;
+/* Hover and focus (tap) state */
+.navbar a:hover,
+.navbar a:focus {
+  color: #e0ffe9;                  /* soft white-green hover color */
+  outline: none;                   /* remove blue focus border */
+  box-shadow: 0 0 0 2px #ffffff50; /* subtle white glow on focus/tap */
+  border-radius: 4px;
 }
 
+/* Active tab (currently selected) */
 .navbar a.active {
-  border-bottom: 2px solid white;
+  border-bottom: 2px solid #ffffff;  /* solid white underline for active */
+  color: #ffffff;                    /* keep text white */
 }
 
 /* ✅ Small screens: Align navbar left */
@@ -207,6 +215,7 @@ nav a.active {
     justify-content: left;
   }
 }
+
 
 
 
