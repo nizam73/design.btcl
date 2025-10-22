@@ -190,11 +190,12 @@ nav a.active {
   .preview,
   .preview-signboard {
     width: 90%;
-    max-width: none;
+    max-width: 150px;
   }
 
   .buttons {
     justify-content: center;
   }
 }
+
 
