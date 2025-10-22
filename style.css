@@ -1,3 +1,4 @@
+/* ========== Global Styles ========== */
 body {
   font-family: "Jost", sans-serif;
   margin: 0;
@@ -33,39 +34,30 @@ nav a.active {
   border-bottom: 2px solid white;
 }
 
-/*-------------.navbar added*/
-
+/* ========== Navbar ========== */
 .navbar {
   display: flex;
-  justify-content: center;      /* ✅ center on wide screens */
-  overflow-x: auto;             /* ✅ scroll horizontally on mobile */
-  white-space: nowrap;          /* ✅ keep all links in one line */
-  scrollbar-width: none;        /* ✅ hide scrollbar (Firefox) */
-  -ms-overflow-style: none;     /* ✅ hide scrollbar (Edge/IE) */
-  background: #2AB573;          /* optional */
+  justify-content: center;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+  background: #2ab573;
   padding: 10px 0;
   scroll-behavior: smooth;
 }
 
 .navbar::-webkit-scrollbar {
-  display: none;                /* ✅ hide scrollbar (Chrome/Safari) */
+  display: none; /* Chrome/Safari */
 }
 
 .navbar a {
-  flex: 0 0 auto;               /* ✅ prevent squishing */
+  flex: 0 0 auto;
   color: white;
   text-decoration: none;
   font-weight: bold;
   padding: 10px 15px;
   transition: color 0.2s ease;
-}
-
-/* ✅ Centering fix for small screens */
-@media (max-width: 600px) {
-  .navbar {
-    justify-content: flex-start;  /* ✅ align left on small screens */
-    padding-left: 10px;           /* ✅ keep Home visible */
-  }
 }
 
 .navbar a:hover {
@@ -76,10 +68,15 @@ nav a.active {
   border-bottom: 2px solid white;
 }
 
+/* ✅ Small screens: Align navbar left */
+@media (max-width: 600px) {
+  .navbar {
+    justify-content: flex-start;
+    padding-left: 10px;
+  }
+}
 
-
-/*-------------.navbar added*/
-
+/* ========== Tabs ========== */
 .tab-content {
   display: none;
   margin-top: 30px;
@@ -90,12 +87,14 @@ nav a.active {
   display: flex;
 }
 
+/* ========== Cards ========== */
 .cards {
   display: flex;
-  flex-direction: column;  /* stack vertically */
-  align-items: center;     /* center all cards horizontally */
-  gap: 20px;               /* space between cards */
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
   width: 100%;
+  padding: 0 10px;
 }
 
 .card {
@@ -103,10 +102,11 @@ nav a.active {
   max-width: 500px;
   background: #fff;
   padding: 25px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   text-align: left;
-  border: 2px solid #2AB573;   /* ✅ added green border */
+  border: 2px solid #2ab573;
+  box-sizing: border-box;
 }
 
 .card h2 {
@@ -119,46 +119,53 @@ nav a.active {
   color: #555;
 }
 
-.preview {
-  display: block;
-  width: 20%;
-  height: auto;
-  border-radius: 8px;
-  margin: 15px 0;
-  border: 1px solid #eee;
-}
-
-
-/*--------------preview-signboard*/
-
+/* ========== Preview Images ========== */
+.preview,
 .preview-signboard {
   display: block;
-  width: 40%;
   height: auto;
-  border-radius: 2px;
+  border-radius: 6px;
   margin: 15px 0;
   border: 1px solid #eee;
+  max-width: 100%;
+  object-fit: contain;
 }
 
+/* Different image proportions for special types */
+.preview {
+  width: 60%;          /* More visible on both mobile & desktop */
+  max-width: 250px;    /* Prevents over-expansion */
+}
 
+.preview-signboard {
+  width: 80%;
+  max-width: 350px;
+}
+
+/* ========== Buttons ========== */
 .buttons {
   display: flex;
-  flex-direction: row;     /* ✅ side-by-side */
-  justify-content: left; /* centers all buttons */
+  flex-wrap: wrap;          /* ✅ Allows wrapping on small screens */
+  justify-content: flex-start;
   align-items: center;
-  gap: 10px;               /* space between buttons */
+  gap: 10px;
   margin-top: 10px;
 }
 
 .btn {
   display: inline-block;
   padding: 10px;
-  text-align: center;
- width: 100px; 
+  width: 100px;
   border-radius: 6px;
   color: white;
+  text-align: center;
   text-decoration: none;
   font-weight: 500;
+  transition: opacity 0.2s ease;
+}
+
+.btn:hover {
+  opacity: 0.9;
 }
 
 .btn.green {
@@ -170,23 +177,23 @@ nav a.active {
 }
 
 .btn.light {
-  background-color: #38B449;
+  background-color: #38b449;
 }
 
+/* ========== Responsive Adjustments ========== */
 @media (max-width: 600px) {
   .card {
     width: 95%;
-    padding: 20px;
+    padding: 18px;
+  }
+
+  .preview,
+  .preview-signboard {
+    width: 90%;
+    max-width: none;
+  }
+
+  .buttons {
+    justify-content: center;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
