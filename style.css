@@ -134,12 +134,12 @@ nav a.active {
 /* Different image proportions for special types */
 .preview {
   width: 60%;          /* More visible on both mobile & desktop */
-  max-width: 250px;    /* Prevents over-expansion */
+  max-width: 150px;    /* Prevents over-expansion */
 }
 
 .preview-signboard {
   width: 80%;
-  max-width: 350px;
+  max-width: 150px;
 }
 
 /* ========== Buttons ========== */
@@ -197,3 +197,4 @@ nav a.active {
     justify-content: center;
   }
 }
+
