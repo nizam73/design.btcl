@@ -1,56 +1,53 @@
+/* ========== CSS Variables ========== */
+:root {
+  --green: #2ab573;
+  --green-dark: #024d2e;
+  --green-mid: #38b449;
+  --green-hover: #e0ffe9;
+  --text-main: #222;
+  --text-muted: #555;
+  --border-light: #ccc;
+  --card-shadow: rgba(0, 0, 0, 0.1);
+}
+
 /* ========== Global Styles ========== */
 body {
   font-family: "Jost", sans-serif;
   margin: 0;
   background: #fff;
-  color: #222;
+  color: var(--text-main);
   text-align: center;
 }
 
+/* ========== Header ========== */
 header {
-  background: #2ab573;
+  background: var(--green);
   color: white;
-  padding: 10px 5px;
+  padding: 10px 5px 0;
+  /* FIX: replaced the ___ paragraph hack with a real border */
+  border-bottom: 3px solid rgba(255, 255, 255, 0.3);
 }
-
 header h1 {
-  margin: 0;
+  margin: 0 0 10px;
   font-size: 24px;
 }
 
-nav {
-  margin-top: 10px;
-}
-
-nav a {
-  text-decoration: none;
-  color: white;
-  margin: 0 15px;
-  font-weight: 500;
-  border-bottom: 2px solid transparent;
-}
-
-nav a.active {
-  border-bottom: 2px solid white;
-}
-
 /* ========== Navbar ========== */
+/* FIX: removed redundant duplicate nav a / navbar a rules — consolidated here */
 .navbar {
   display: flex;
   justify-content: center;
   overflow-x: auto;
   white-space: nowrap;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge */
-  background: #2ab573;
+  scrollbar-width: none;       /* Firefox */
+  -ms-overflow-style: none;    /* IE/Edge */
+  background: var(--green);
   padding: 10px 0;
   scroll-behavior: smooth;
 }
-
 .navbar::-webkit-scrollbar {
-  display: none; /* Chrome/Safari */
+  display: none;               /* Chrome/Safari */
 }
-
 .navbar a {
   flex: 0 0 auto;
   color: white;
@@ -60,28 +57,16 @@ nav a.active {
   transition: all 0.2s ease;
   border-bottom: 2px solid transparent;
 }
-
-/* Hover and focus (tap) state */
 .navbar a:hover,
 .navbar a:focus {
-  color: #e0ffe9;                  /* soft white-green hover color */
-  outline: none;                   /* remove blue focus border */
-  box-shadow: 0 0 0 2px #ffffff50; /* subtle white glow on focus/tap */
+  color: var(--green-hover);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
   border-radius: 4px;
 }
-
-/* Active tab (currently selected) */
 .navbar a.active {
-  border-bottom: 2px solid #ffffff;  /* solid white underline for active */
-  color: #ffffff;                    /* keep text white */
-}
-
-/* ✅ Small screens: Align navbar left */
-@media (max-width: 600px) {
-  .navbar {
-    justify-content: flex-start;
-    padding-left: 10px;
-  }
+  border-bottom: 2px solid #fff;
+  color: #fff;
 }
 
 /* ========== Tabs ========== */
@@ -90,7 +75,6 @@ nav a.active {
   margin-top: 30px;
   justify-content: center;
 }
-
 .tab-content.active {
   display: flex;
 }
@@ -104,39 +88,41 @@ nav a.active {
   width: 100%;
   padding: 0 10px;
 }
-
 .card {
   width: 90%;
   max-width: 500px;
   background: #fff;
   padding: 10px;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px var(--card-shadow);
   text-align: left;
-  border: 2px solid #2ab573;
+  border: 2px solid var(--green);
   box-sizing: border-box;
   margin-bottom: 10px;
 }
-
 .card h2 {
   font-size: 20px;
   margin-bottom: 5px;
 }
-
 .card p {
   margin-top: 0;
-  color: #555;
+  color: var(--text-muted);
 }
 
-/* ========== Divider Added ========== */
+/* FIX: utility class for warning text instead of inline color:red !important */
+.warning {
+  color: #c0392b !important;
+  font-weight: 500;
+}
+
+/* ========== Divider ========== */
 .divider {
   width: 100%;
   height: 1px;
-  background: #ccc;       /* light gray line */
-  margin: 10px 0;         /* spacing above/below */
+  background: var(--border-light);
+  margin: 10px 0;
   border: none;
 }
-
 
 /* ========== Preview Images ========== */
 .preview,
@@ -149,13 +135,10 @@ nav a.active {
   max-width: 100%;
   object-fit: contain;
 }
-
-/* Different image proportions for special types */
 .preview {
-  width: 60%;          /* More visible on both mobile & desktop */
-  max-width: 150px;    /* Prevents over-expansion */
+  width: 60%;
+  max-width: 150px;
 }
-
 .preview-signboard {
   width: 80%;
   max-width: 150px;
@@ -164,13 +147,13 @@ nav a.active {
 /* ========== Buttons ========== */
 .buttons {
   display: flex;
-  flex-wrap: wrap;          /* ✅ Allows wrapping on small screens */
+  flex-wrap: wrap;
   justify-content: flex-start;
-  align-items: left;
+  /* FIX: align-items: left is invalid — corrected to flex-start */
+  align-items: flex-start;
   gap: 10px;
   margin-top: 10px;
 }
-
 .btn {
   display: inline-block;
   padding: 10px;
@@ -182,45 +165,29 @@ nav a.active {
   font-weight: 500;
   transition: opacity 0.2s ease;
 }
-
 .btn:hover {
   opacity: 0.9;
 }
+.btn.green { background-color: var(--green); }
+.btn.dark  { background-color: var(--green-dark); }
+.btn.light { background-color: var(--green-mid); }
 
-.btn.green {
-  background-color: #2ab573;
-}
-
-.btn.dark {
-  background-color: #024d2e;
-}
-
-.btn.light {
-  background-color: #38b449;
-}
-
-/* ========== Responsive Adjustments ========== */
+/* ========== Responsive ========== */
 @media (max-width: 600px) {
+  .navbar {
+    justify-content: flex-start;
+    padding-left: 10px;
+  }
   .card {
     width: 95%;
     padding: 18px;
   }
-
   .preview,
   .preview-signboard {
     width: 90%;
     max-width: 150px;
   }
-
   .buttons {
-    justify-content: left;
+    justify-content: flex-start;
   }
 }
-
-
-
-
-
-
-
-
