@@ -7,181 +7,186 @@
   <title>design.btcl</title>
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
-  <noscript><style>.noscript-msg { display: block !important; } .tab-content.active { display: flex !important; }</style></noscript>
 </head>
 <body>
+
+  <!-- ===== HEADER ===== -->
   <header>
-    <h1>design.btcl</h1>
-    <!-- FIX: Replaced ___ hack with CSS border-bottom on header -->
-    <nav class="navbar" role="tablist" aria-label="Section Navigation">
-      <a class="active" href="#" role="tab" aria-selected="true"  tabindex="0" onclick="openTab(event, 'home')">Home</a>
-      <a href="#"             role="tab" aria-selected="false" tabindex="0" onclick="openTab(event, 'gpon')">GPON</a>
-      <a href="#"             role="tab" aria-selected="false" tabindex="0" onclick="openTab(event, 'lli')">LLI</a>
-      <a href="#"             role="tab" aria-selected="false" tabindex="0" onclick="openTab(event, 'vpn')">VPN</a>
-      <a href="#"             role="tab" aria-selected="false" tabindex="0" onclick="openTab(event, 'domain')">Domain</a>
-    </nav>
+    <div class="header-left">
+      <h1>design.btcl</h1>
+    </div>
+    <div class="header-right">
+      <!-- User avatar (shown when logged in) -->
+      <div id="user-avatar-wrap" class="hidden">
+        <img id="user-avatar" src="" alt="User profile picture" title="" />
+      </div>
+      <!-- Login button (shown when logged out) -->
+      <button id="login-btn" class="btn-login" title="Sign in with Google">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908C16.658 14.121 17.64 11.834 17.64 9.2z" fill="#4285F4"/>
+          <path d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z" fill="#34A853"/>
+          <path d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z" fill="#FBBC05"/>
+          <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 6.29C4.672 4.163 6.656 3.58 9 3.58z" fill="#EA4335"/>
+        </svg>
+        Sign In
+      </button>
+      <!-- More (⋮) menu — always visible, admin portal inside -->
+      <div class="more-menu-wrap">
+        <button class="btn-more" id="more-btn" aria-label="More options" aria-expanded="false">⋮</button>
+        <div class="more-dropdown hidden" id="more-dropdown">
+          <button id="admin-portal-btn" class="dropdown-item hidden">🛠 Admin Portal</button>
+          <button id="logout-btn" class="dropdown-item hidden">Sign Out</button>
+          <span id="dropdown-hint" class="dropdown-hint">Sign in to access more options</span>
+        </div>
+      </div>
+    </div>
   </header>
 
-  <p class="noscript-msg" style="display:none; color:red; text-align:center; margin-top:20px;">
-    JavaScript is disabled. Navigation may not work correctly.
-  </p>
+  <!-- ===== TABS NAV ===== -->
+  <div class="tabs-bar-wrap">
+    <nav class="navbar" id="tabs-nav" role="tablist" aria-label="Section Navigation">
+      <!-- Tabs rendered by JS -->
+    </nav>
+    <!-- Add Tab button — admin only -->
+    <button id="add-tab-btn" class="btn-add-tab hidden" title="Add new tab">＋ Tab</button>
+  </div>
 
-  <!-- Home Tab -->
-  <div id="home" class="tab-content active" role="tabpanel">
-    <div class="cards">
-      <div class="card">
-        <h2>Welcome to Design BTCL</h2>
-        <p>A directory website to allocate the resource links of different design files of BTCL Design Team.</p>
+  <!-- ===== TAB CONTENT AREA ===== -->
+  <main id="tab-content-area">
+    <!-- Rendered by JS -->
+  </main>
+
+  <!-- ===== MODALS ===== -->
+
+  <!-- Google Login Popup (for non-admin button clicks) -->
+  <div class="modal-overlay hidden" id="login-modal">
+    <div class="modal">
+      <button class="modal-close" id="login-modal-close" aria-label="Close">✕</button>
+      <h2>Sign in Required</h2>
+      <p>Please sign in with your Google account to access this file.</p>
+      <button id="login-modal-google-btn" class="btn-google-full">
+        <svg width="20" height="20" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908C16.658 14.121 17.64 11.834 17.64 9.2z" fill="#4285F4"/>
+          <path d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z" fill="#34A853"/>
+          <path d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z" fill="#FBBC05"/>
+          <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 6.29C4.672 4.163 6.656 3.58 9 3.58z" fill="#EA4335"/>
+        </svg>
+        Continue with Google
+      </button>
+    </div>
+  </div>
+
+  <!-- Edit Card Modal -->
+  <div class="modal-overlay hidden" id="edit-card-modal">
+    <div class="modal modal-wide">
+      <button class="modal-close" id="edit-card-close" aria-label="Close">✕</button>
+      <h2 id="edit-card-title">Edit Card</h2>
+      <div class="form-group">
+        <label>Headline</label>
+        <input type="text" id="ec-headline" placeholder="Card headline" />
       </div>
-
-      <!-- Home-1: BTCL Logo -->
-      <div class="card">
-        <h2>BTCL Logo - Colored</h2>
-        <p>07/10/2025 | Ratio = 135 : 61.3</p>
-        <div class="divider"></div>
-        <img src="logo BTCL only.jpg" alt="BTCL colored logo on white background" class="preview" />
-        <p>Preview</p>
-        <div class="divider"></div>
-        <div class="buttons">
-          <a href="https://www.dropbox.com/scl/fi/ypmoqv77g1z7j69cnvpsy/BTCL-logo-only.ai?rlkey=p1oh2ym8nxmvfdphqnqi8d80r&st=p0wqxrzt&dl=0" target="_blank" class="btn green">Vector File ></a>
-          <a href="https://www.dropbox.com/scl/fi/v2dpr5gr2ao4r1vf7p6o5/logo-BTCL-only-2-p-01-Copy.png?rlkey=2idb1glpinturw760aekdo2jg&st=6x2hdysg&dl=0" target="_blank" class="btn dark">Image File ></a>
-          <a href="https://www.dropbox.com/scl/fi/bgumq5wlzak2y12stvz5w/BTCL-logo-only.pdf?rlkey=8kaxufbxuk5zchzk9jbdowt88&st=1ilh3knb&dl=0" target="_blank" class="btn light">PDF File ></a>
-        </div>
+      <div class="form-group">
+        <label>Description <span class="hint">(date, ratio, notes…)</span></label>
+        <input type="text" id="ec-desc" placeholder="e.g. 07/10/2025 | Ratio = 135 : 61.3" />
       </div>
-
-      <!-- Home-2: Govt. Logo -->
-      <div class="card">
-        <h2>Government Logo - Colored</h2>
-        <p>19/10/2025 | Ratio = 1:1</p>
-        <div class="divider"></div>
-        <img src="govt logo.png" alt="Bangladesh Government emblem in color" class="preview" />
-        <p>Preview</p>
-        <div class="divider"></div>
-        <div class="buttons">
-          <a href="https://www.dropbox.com/scl/fi/z1qcmtrwe4qmg1udtw2pj/logo-govt.ai?rlkey=f96ah0dx1k4381muckm46bvgd&st=tc0k2rvx&dl=0" target="_blank" class="btn green">Vector File ></a>
-          <a href="https://www.dropbox.com/scl/fi/lkjpj18qhg8zs0ci9lz8e/govt-logo.png?rlkey=w9tnj87tthyf7qcaq3g1fu31q&st=okwjrn0b&dl=0" target="_blank" class="btn dark">Image File ></a>
-          <a href="https://www.dropbox.com/scl/fi/tjgqbswiw0ikg2jokmy7a/logo-govt.pdf?rlkey=y2wujhb7kivmyp4yxlmuhtn7x&st=qjxlr0jg&dl=0" target="_blank" class="btn light">PDF File ></a>
-        </div>
+      <div class="form-group">
+        <label>Warning text <span class="hint">(leave empty to hide)</span></label>
+        <input type="text" id="ec-warning" placeholder="e.g. Change Contact Address as required" />
       </div>
-
-      <!-- Home-3: Signboard - Gate -->
-      <div class="card">
-        <h2>Signboard for Gate</h2>
-        <p>06/10/2025</p>
-        <div class="divider"></div>
-        <img src="sylhet office signboard.png" alt="Sylhet office gate signboard design" class="preview" />
-        <p>Preview</p>
-        <div class="divider"></div>
-        <div class="buttons">
-          <a href="https://www.dropbox.com/scl/fi/hr1ohvb3w1ae2upfemavp/sylhet-office-signboard.png?rlkey=mjkss9jmmoesgcg1f8t39gtxp&st=qdt4p14v&dl=0" target="_blank" class="btn green">Vector File ></a>
-          <a href="https://www.dropbox.com/scl/fi/hr1ohvb3w1ae2upfemavp/sylhet-office-signboard.png?rlkey=mjkss9jmmoesgcg1f8t39gtxp&st=guxy7u2g&dl=0" target="_blank" class="btn dark">Image File ></a>
-          <a href="https://www.dropbox.com/scl/fi/4dmc7zrroy9eikoke19nj/sylhet-office-signboard-p.pdf?rlkey=hy2y36cv9zd6m7y1uilpumzd2&st=gaso141y&dl=0" target="_blank" class="btn light">PDF File ></a>
-        </div>
+      <div class="form-group">
+        <label>Preview image filename <span class="hint">(must be in root folder)</span></label>
+        <input type="text" id="ec-image" placeholder="e.g. logo BTCL only.jpg" />
       </div>
-
-      <!-- Home-4: Customer Care Signboard -->
-      <div class="card">
-        <h2>Customer Care Signboard</h2>
-        <p>02/01/2026</p>
-        <!-- FIX: replaced inline color:red style with a semantic class -->
-        <p class="warning">⚠ Change Contact Address as required</p>
-        <div class="divider"></div>
-        <img src="signboard design-Customer care-2026-prev.png" alt="Customer Care signboard design 2026" class="preview" />
-        <p>Preview</p>
-        <div class="divider"></div>
-        <div class="buttons">
-          <a href="https://www.dropbox.com/scl/fi/u6gdo1op6ortrpi9jrzea/signboard-design-Customer-care-2026-p.ai?rlkey=z4vao0adca28o1ffbkbk0qylz&st=7h4beu53&dl=0" target="_blank" class="btn green">Vector File ></a>
-          <a href="https://www.dropbox.com/scl/fi/cdxoimlqnx6b0h8vzr9de/signboard-design-Customer-care-2026-01.png?rlkey=gd1767hz875lrmzs1k4wklt48&st=uj8k7hs0&dl=0" target="_blank" class="btn dark">Image File ></a>
-          <a href="https://www.dropbox.com/scl/fi/uzyjkja80rgheei06rtjx/signboard-design-Customer-care-2026-p.pdf?rlkey=16ni39nh319p3qon6ekhv0v9e&st=tyqk0nqw&dl=0" target="_blank" class="btn light">PDF File ></a>
-        </div>
+      <div class="form-group">
+        <label>Image alt text</label>
+        <input type="text" id="ec-alt" placeholder="Describe the image" />
+      </div>
+      <hr class="form-divider" />
+      <p class="form-section-label">Download Buttons</p>
+      <div class="form-group">
+        <label>Vector File URL</label>
+        <input type="url" id="ec-btn-green" placeholder="https://…" />
+      </div>
+      <div class="form-group">
+        <label>Image File URL</label>
+        <input type="url" id="ec-btn-dark" placeholder="https://…" />
+      </div>
+      <div class="form-group">
+        <label>PDF File URL</label>
+        <input type="url" id="ec-btn-light" placeholder="https://…" />
+      </div>
+      <input type="hidden" id="ec-tab-id" />
+      <input type="hidden" id="ec-card-id" />
+      <div class="modal-actions">
+        <button class="btn-cancel" id="edit-card-cancel">Cancel</button>
+        <button class="btn-save" id="edit-card-save">Save</button>
       </div>
     </div>
   </div>
 
-  <!-- GPON Tab -->
-  <div id="gpon" class="tab-content" role="tabpanel">
-    <div class="cards">
-      <!-- GPON-1: Leaflet -->
-      <div class="card">
-        <h2>GPON Leaflet</h2>
-        <p>02/01/2026 | 1 Fold Leaflet</p>
-        <div class="divider"></div>
-        <img src="GPON-2025-leaflet-GPON-7-p-01.png" alt="GPON fiber broadband leaflet front page" class="preview" />
-        <p>Preview</p>
-        <div class="divider"></div>
-        <div class="buttons">
-          <a href="https://www.dropbox.com/scl/fi/y6cmggb2olrxt3ad0ec2j/GPON-leaflet-2026-p.ai?rlkey=pdehfn3a6ir2ii4lv0v8bsg03&st=l5vptxut&dl=0" target="_blank" class="btn green">Vector File ></a>
-          <a href="https://www.dropbox.com/scl/fi/nej2b9r9jcvke1zdakfmt/GPON-leaflet-2026-p-03.png?rlkey=cl9bp7neos1sjrr4q01jdfh3f&st=ms0e5drm&dl=0" target="_blank" class="btn dark">Image File ></a>
-          <a href="https://www.dropbox.com/scl/fi/l60qatoab05tl51ik3uyn/GPON-leaflet-2026-p.pdf?rlkey=lj2w6u4c1do240hvzwggybw74&st=l35259ur&dl=0" target="_blank" class="btn light">PDF File ></a>
-        </div>
+  <!-- Add Tab Modal -->
+  <div class="modal-overlay hidden" id="add-tab-modal">
+    <div class="modal">
+      <button class="modal-close" id="add-tab-close" aria-label="Close">✕</button>
+      <h2>New Tab</h2>
+      <div class="form-group">
+        <label>Tab Name</label>
+        <input type="text" id="new-tab-name" placeholder="e.g. VPN" maxlength="30" />
       </div>
-
-      <!-- GPON-2: Poster -->
-      <div class="card">
-        <h2>GPON Poster</h2>
-        <p>02/01/2026 | Ratio 2.55 : 3.3</p>
-        <div class="divider"></div>
-        <img src="GPON-Poster-2025-prev.png" alt="GPON fiber broadband poster 2026" class="preview" />
-        <p>Preview</p>
-        <div class="divider"></div>
-        <div class="buttons">
-          <a href="https://www.dropbox.com/scl/fi/xxgq3fk56xhbam19so96f/GPON-Poster-2026-p.ai?rlkey=hh5hzwltako2oryyy5r5rhz12&st=zmmysx8f&dl=0" target="_blank" class="btn green">Vector File ></a>
-          <a href="https://www.dropbox.com/scl/fi/d49ycowulc51j608u90q8/GPON-Poster-2026-01.png?rlkey=qc3pgb9ey4avsvsv9ntyqerz9&st=cj7cibel&dl=0" target="_blank" class="btn dark">Image File ></a>
-          <a href="https://www.dropbox.com/scl/fi/6zr10q39z45ia19j018r0/GPON-Poster-2026-p.pdf?rlkey=lece7jaemu0ejxefgpp41u81j&st=po1aydhd&dl=0" target="_blank" class="btn light">PDF File ></a>
-        </div>
-      </div>
-
-      <!-- GPON-3: Banner -->
-      <div class="card">
-        <h2>GPON Banner</h2>
-        <p>02/01/2026 | Ratio 2.5 : 1</p>
-        <div class="divider"></div>
-        <img src="GPON-Banner-2026-prev-01.png" alt="GPON fiber broadband horizontal banner 2026" class="preview" />
-        <p>Preview</p>
-        <div class="divider"></div>
-        <div class="buttons">
-          <a href="https://www.dropbox.com/scl/fi/k13jg6zrtmtwyt6krysfa/GPON-Banner-2026-p.ai?rlkey=xm9bxzy7vkuo9xnr6rwe11146&st=nvnobmhq&dl=0" target="_blank" class="btn green">Vector File ></a>
-          <a href="https://www.dropbox.com/scl/fi/9wx8sl5tc0cpj7fb84rj7/GPON-Banner-2026-01.png?rlkey=6pl0knm4mtrych9h341mrotie&st=5y8iqdqx&dl=0" target="_blank" class="btn dark">Image File ></a>
-          <a href="https://www.dropbox.com/scl/fi/dbuk4lzle04oe275h2wno/GPON-Banner-2026-p.pdf?rlkey=fauy76q9holhcee46dxdagx8d&st=f9y36ccg&dl=0" target="_blank" class="btn light">PDF File ></a>
-        </div>
-      </div>
-
-      <!-- GPON-4: Leaflet with Contact Info -->
-      <div class="card">
-        <h2>GPON Leaflet – with Contact Info</h2>
-        <p class="warning">⚠ Change Contact Address as required</p>
-        <div class="divider"></div>
-        <img src="GPON-2025-leaflet-GPON-7-p-01.png" alt="GPON leaflet with Ramna office contact address" class="preview" />
-        <p>Preview</p>
-        <div class="divider"></div>
-        <div class="buttons">
-          <a href="https://www.dropbox.com/scl/fi/yzyutyl0xs9loq3y84m50/GPON-leaflet-2026-Ramna-p.ai?rlkey=m0gfpftiwb8ycpqaot7cbvjhy&st=rww7e7us&dl=0" target="_blank" class="btn green">Vector File ></a>
-          <a href="https://www.dropbox.com/scl/fi/l4ie53pl5zridifbwilz1/GPON-leaflet-2026-Ramna-03.png?rlkey=pdnho24ce178wcebvv6d0b3x1&st=lnbeoiv7&dl=0" target="_blank" class="btn dark">Image File ></a>
-          <a href="https://www.dropbox.com/scl/fi/n303bjzui6kdwcpvxv97t/GPON-leaflet-2026-Ramna-p.pdf?rlkey=nmxo17k4g0lbmwtt294wcoa0e&st=snuvbh8s&dl=0" target="_blank" class="btn light">PDF File ></a>
-        </div>
+      <div class="modal-actions">
+        <button class="btn-cancel" id="add-tab-cancel">Cancel</button>
+        <button class="btn-save" id="add-tab-save">Create Tab</button>
       </div>
     </div>
   </div>
 
-  <!-- FIX: Stub tabs now use .cards wrapper so layout is consistent when content is added -->
-  <div id="lli" class="tab-content" role="tabpanel">
-    <div class="cards">
-      <div class="card"><h2>LLI Files</h2><p>Content coming soon…</p></div>
+  <!-- Edit Tab Name Modal -->
+  <div class="modal-overlay hidden" id="edit-tab-modal">
+    <div class="modal">
+      <button class="modal-close" id="edit-tab-close" aria-label="Close">✕</button>
+      <h2>Rename Tab</h2>
+      <div class="form-group">
+        <label>Tab Name</label>
+        <input type="text" id="edit-tab-name" placeholder="Tab name" maxlength="30" />
+      </div>
+      <input type="hidden" id="edit-tab-id" />
+      <div class="modal-actions">
+        <button class="btn-cancel" id="edit-tab-cancel">Cancel</button>
+        <button class="btn-save" id="edit-tab-save">Save</button>
+      </div>
     </div>
   </div>
 
-  <div id="vpn" class="tab-content" role="tabpanel">
-    <div class="cards">
-      <div class="card"><h2>VPN Files</h2><p>Content coming soon…</p></div>
+  <!-- Admin Portal Modal -->
+  <div class="modal-overlay hidden" id="admin-modal">
+    <div class="modal modal-wide">
+      <button class="modal-close" id="admin-modal-close" aria-label="Close">✕</button>
+      <h2>Admin Portal</h2>
+      <p class="admin-desc">Manage which Google accounts have admin access.</p>
+      <div class="form-group">
+        <label>Add Admin Email</label>
+        <div class="inline-input-row">
+          <input type="email" id="new-admin-email" placeholder="user@gmail.com" />
+          <button class="btn-save" id="add-admin-btn">Add</button>
+        </div>
+      </div>
+      <div id="admin-list" class="admin-list">
+        <!-- Rendered by JS -->
+      </div>
+      <div class="modal-actions">
+        <button class="btn-cancel" id="admin-modal-close2">Close</button>
+      </div>
     </div>
   </div>
 
-  <div id="domain" class="tab-content" role="tabpanel">
-    <div class="cards">
-      <div class="card"><h2>Domain Files</h2><p>Content coming soon…</p></div>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
+  <!-- Toast notification -->
+  <div id="toast" class="toast hidden"></div>
+  
+ <!-- Load .env config FIRST, before Firebase modules -->
+	<script src="env-loader.js"></script>
+	
+  <!-- Firebase SDK -->
+  <script type="module" src="firebase-init.js"></script>
+    <script type="module" src="app.js"></script>
 </body>
 </html>
