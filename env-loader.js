@@ -6,7 +6,7 @@
 
 (async function () {
   try {
-    const res = await fetch(".env");
+    const res = await fetch("conf73.env");
     if (!res.ok) {
       console.warn("[env-loader] Could not load .env file. Make sure it exists in the root folder.");
       window.ENV = {};
