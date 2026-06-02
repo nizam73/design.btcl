@@ -39,7 +39,7 @@ header {
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 0px rgba(0,0,0,0);
 }
 header h1 {
   font-size: 20px;
